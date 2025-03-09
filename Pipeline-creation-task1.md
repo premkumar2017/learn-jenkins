@@ -28,3 +28,6 @@ Now change the stage name docker-verify and replace from hello world to docker -
 Now click on build now
 
 ![image](https://github.com/user-attachments/assets/ad71335f-3593-44b4-96a0-082209c55981)
+
+![image](https://github.com/user-attachments/assets/bd1c1864-4022-488d-bdd6-1878658dfa7c)
+

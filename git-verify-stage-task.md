@@ -13,6 +13,29 @@ Build the Pipeline to print the Docker Version and Git Version in the output
 Answer
 
 Just add new stage as git-verify in the existing pipeline configuration and check build the pipeline
+Pipeline configuration
+
+```
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Docker-Verify') {
+            steps {
+                echo 'docker --version'
+            }
+        }
+        stage('git-verify'){
+            steps {
+                sh 'git --version'
+            }
+        }
+        
+    }
+}
+
+```
 
 ![image](https://github.com/user-attachments/assets/4f89d1a3-3682-4c5e-8e6d-aeaaeef6e50e)
 

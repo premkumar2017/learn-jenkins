@@ -28,4 +28,77 @@ Now build is successfull
 ![image](https://github.com/user-attachments/assets/df666b30-da21-4d62-a3c2-425e05e91391)
 
 
+It looks like Jenkins is running as a user that is **not in the `sudoers` group**, causing permission issues when executing Docker commands. Here’s how you can fix this:
 
+---
+
+### ✅ **Solution 1: Add Jenkins to the Docker Group (Recommended)**
+Instead of using `sudo`, allow the `jenkins` user to run Docker directly.
+
+1. **Check if the `docker` group exists**  
+   ```sh
+   cat /etc/group | grep docker
+   ```
+   If no output, create the group:
+   ```sh
+   sudo groupadd docker
+   ```
+
+2. **Add Jenkins to the `docker` group**  
+   ```sh
+   sudo usermod -aG docker jenkins
+   ```
+
+3. **Restart Jenkins & Docker**  
+   ```sh
+   sudo systemctl restart docker
+   sudo systemctl restart jenkins
+   ```
+
+4. **Test if Jenkins can run Docker without sudo**  
+   Run this inside a Jenkins job:
+   ```sh
+   docker ps
+   ```
+
+---
+
+### ✅ **Solution 2: Allow Jenkins to Use `sudo` Without a Password**  
+If Solution 1 doesn’t work, allow Jenkins to use `sudo` for Docker commands.
+
+1. Open the `sudoers` file:
+   ```sh
+   sudo visudo
+   ```
+
+2. Add this line at the end:
+   ```
+   jenkins ALL=(ALL) NOPASSWD: /usr/bin/docker
+   ```
+
+3. Save & Exit (`CTRL+X`, then `Y`, then `ENTER`).
+
+4. Modify the Jenkins pipeline or job to use `sudo`:
+   ```sh
+   sudo docker build -t my-container:v1 .
+   ```
+
+---
+
+### ✅ **Solution 3: Run Jenkins in Docker With Docker Socket (Alternative)**
+If Jenkins is running in a **Docker container**, you can mount the host Docker socket to give it access:
+```sh
+docker run -d --name jenkins \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  jenkins/jenkins:lts
+```
+This allows Jenkins inside the container to communicate with the host’s Docker.
+
+---
+
+### 🎯 **Best Approach?**
+- ✅ **For security & best practices:** Use **Solution 1** (Add Jenkins to `docker` group).
+- 🔴 **If needed for automation:** Use **Solution 2** (`sudo` without a password).
+- 🐳 **If running Jenkins in Docker:** Use **Solution 3** (Docker socket).
+
+Try these and let me know which works for you! 🚀

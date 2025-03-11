@@ -28,7 +28,16 @@ Now build is successfull
 ![image](https://github.com/user-attachments/assets/df666b30-da21-4d62-a3c2-425e05e91391)
 
 
-It looks like Jenkins is running as a user that is **not in the `sudoers` group**, causing permission issues when executing Docker commands. Here’s how you can fix this:
+---
+**+ sudo docker build -t my-container:v1 .
+
+sudo: a terminal is required to read the password; either use the -S option to read from standard input or configure an askpass helper
+
+sudo: a password is required
+
+script returned exit code 1
+
+It looks like Jenkins is running as a user that is **not in the `sudoers` group**, causing permission issues when executing Docker commands. Here’s how you can fix this:******
 
 ---
 

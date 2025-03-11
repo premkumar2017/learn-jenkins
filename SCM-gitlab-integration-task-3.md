@@ -16,6 +16,10 @@ Update the Branch to Main and click save
 
 ![image](https://github.com/user-attachments/assets/1f540e91-f9b4-4c4d-a1eb-3dadc682d9b4)
 
+It is time to build jenkin piple via scm using git integration. Run build now and see the whether pipeline is running or not
+
+![image](https://github.com/user-attachments/assets/45b49d76-a16e-454d-872d-01d917726ca4)
+
 
 
 

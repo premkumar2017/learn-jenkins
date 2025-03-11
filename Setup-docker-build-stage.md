@@ -11,7 +11,7 @@ Then Run the DevOps Pipeline after Jenkinsfile is updated
 ![image](https://github.com/user-attachments/assets/784c9d95-128c-41da-909e-071ba85a7241)
 
 
-In case you are facing issue in the build jenkins the following, check the jenkins logs
+In case you are facing issue while running the pipeline, check the jenkins logs
 
 ![image](https://github.com/user-attachments/assets/02be7d70-d281-4ac1-a956-9fef7c8ee542)
 

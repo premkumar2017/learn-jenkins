@@ -52,7 +52,7 @@ pipeline {
                         retry(3) {
                             sh 'docker --version'
                         }
-                        sh 'sleep 30'  // Adding sleep for 30 seconds
+                        
                     }
                 }
                 stage('Git-Verify') {
